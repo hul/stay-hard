@@ -22,7 +22,7 @@
   <script setup lang="ts">
   import { ref, onMounted } from 'vue'
   import { useRoute, useRouter } from 'vue-router'
-  import { getAllTrainings, saveTraining, type Training } from '@/db'
+  import { getAllTrainings, saveTraining, type Training } from '@/db/trainings'
   import ExerciseEditor from '@/components/ExerciseEditor.vue'
   
   const route = useRoute()

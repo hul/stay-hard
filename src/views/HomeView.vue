@@ -11,7 +11,7 @@ import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import TrainingList from '@/components/TrainingList.vue'
 import AddTrainingButton from '@/components/AddTrainingButton.vue'
-import { getAllTrainings, type Training, deleteTraining } from '@/db'
+import { getAllTrainings, type Training, deleteTraining } from '@/db/trainings'
 
 const router = useRouter()
 
@@ -22,12 +22,11 @@ onMounted(async () => {
 })
 
 function handleCreate(type: 'template' | 'blank') {
-    if (type === 'blank') {
-        router.push('/new-training')
-    } else {
-        // Tu może być: router.push('/choose-template') w przyszłości
-        alert('Opcja "Z szablonu" jeszcze nie gotowa')
-    }
+  if (type === 'blank') {
+    router.push('/new-training')
+  } else {
+    router.push('/choose-template')
+  }
 }
 
 async function handleDelete(id: string) {

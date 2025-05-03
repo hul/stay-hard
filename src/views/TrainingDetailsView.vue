@@ -28,7 +28,7 @@ import { calculatePoints } from '@/utils/points'
 
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { type Training, getAllTrainings } from '@/db'
+import { type Training, getAllTrainings } from '@/db/trainings'
 
 const route = useRoute()
 const training = ref<Training | null>(null)

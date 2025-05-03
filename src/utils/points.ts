@@ -1,4 +1,4 @@
-import type { Training } from '@/db'
+import type { Training } from '@/db/trainings'
 
 export function calculatePoints(training: Training): number {
   if (!training || !training.exercises || training.exercises.length === 0) {

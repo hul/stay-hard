@@ -20,11 +20,16 @@ export interface ExerciseSet {
   reps: number
 }
 
-const dbPromise = openDB('stay-hard-db', 1, {
+const DB_VERSION = 2
+
+const dbPromise = openDB('stay-hard-db', DB_VERSION, {
   upgrade(db) {
     if (!db.objectStoreNames.contains('trainings')) {
       db.createObjectStore('trainings', { keyPath: 'id' })
     }
+    if (!db.objectStoreNames.contains('templates')) {
+      db.createObjectStore('templates', { keyPath: 'id' })
+    }    
   }
 })
 
@@ -41,4 +46,15 @@ export async function getAllTrainings(): Promise<Training[]> {
 export async function deleteTraining(id: string) {
   const db = await dbPromise
   await db.delete('trainings', id)
+}
+
+export async function saveTemplate(template: Omit<Training, 'id' | 'date'>) {
+  const db = await dbPromise
+  const id = `template-${Date.now()}`
+  await db.put('templates', { ...template, id })
+}
+
+export async function getTemplates(): Promise<Omit<Training, 'date'>[]> {
+  const db = await dbPromise
+  return await db.getAll('templates')
 }

@@ -15,21 +15,31 @@
         </div>
 
         <button @click="handleSaveTraining">💾 Zapisz trening</button>
+        <button @click="handleSaveTemplate">📋 Zapisz jako szablon</button>
     </main>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { v4 as uuidv4 } from 'uuid'
-
-import { saveTraining } from '@/db'
+import { saveTraining, saveTemplate } from '@/db/trainings'
 import ExerciseEditor from '@/components/ExerciseEditor.vue'
 
 const router = useRouter()
 
 const trainingName = ref('')
 const exercises = ref<any[]>([])
+
+onMounted(() => {
+  const saved = localStorage.getItem('templateToUse')
+  if (saved) {
+    const parsed = JSON.parse(saved)
+    trainingName.value = parsed.name + ' (kopia)'
+    exercises.value = parsed.exercises
+    localStorage.removeItem('templateToUse')
+  }
+})
 
 function addExercise() {
     exercises.value.push({
@@ -56,6 +66,18 @@ function handleSaveTraining() {
         alert('Trening zapisany!')
         router.push('/')
     })
+}
+
+
+function handleSaveTemplate() {
+  const template = {
+    name: trainingName.value,
+    exercises: JSON.parse(JSON.stringify(exercises.value))
+  }
+
+  saveTemplate(template).then(() => {
+    alert('Szablon zapisany!')
+  })
 }
 
 </script>
