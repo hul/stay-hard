@@ -64,3 +64,8 @@ export async function getTemplates(): Promise<Omit<Training, 'date'>[]> {
   const db = await dbPromise
   return await db.getAll('templates')
 }
+
+export async function deleteTemplate(id: string) {
+  const db = await dbPromise
+  await db.delete('templates', id)
+}
