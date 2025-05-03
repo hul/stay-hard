@@ -25,7 +25,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { Training, getAllTrainings } from '@/db'
+import { type Training, getAllTrainings } from '@/db'
 
 const route = useRoute()
 const training = ref<Training | null>(null)

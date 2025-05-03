@@ -8,7 +8,7 @@
       </label>
   
       <ExerciseEditor
-        v-for="(exercise, index) in training.exercises"
+        v-for="(_, index) in training.exercises"
         :key="index"
         v-model:exercise="training.exercises[index]"
         @remove="removeExercise(index)"
@@ -22,8 +22,7 @@
   <script setup lang="ts">
   import { ref, onMounted } from 'vue'
   import { useRoute, useRouter } from 'vue-router'
-  import { getAllTrainings, saveTraining, Training } from '@/db'
-  import { v4 as uuidv4 } from 'uuid'
+  import { getAllTrainings, saveTraining, type Training } from '@/db'
   import ExerciseEditor from '@/components/ExerciseEditor.vue'
   
   const route = useRoute()

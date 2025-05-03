@@ -6,7 +6,7 @@
 
         <div class="sets">
             <h4>Serie</h4>
-            <SetEditor v-for="(set, i) in exercise.sets" :key="i" v-model:set="exercise.sets[i]"
+            <SetEditor v-for="(_, i) in exercise.sets" :key="i" v-model:set="exercise.sets[i]"
                 @remove="removeSet(i)" />
             <button @click="addSet">+ Dodaj serię</button>
         </div>

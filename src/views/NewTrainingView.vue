@@ -9,7 +9,7 @@
 
         <div class="exercises">
             <h2>Ćwiczenia</h2>
-            <ExerciseEditor v-for="(exercise, index) in exercises" :key="index" v-model:exercise="exercises[index]"
+            <ExerciseEditor v-for="(_, index) in exercises" :key="index" v-model:exercise="exercises[index]"
                 @remove="removeExercise(index)" />
             <button @click="addExercise">+ Dodaj ćwiczenie</button>
         </div>

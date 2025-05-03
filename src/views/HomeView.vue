@@ -11,7 +11,7 @@ import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import TrainingList from '@/components/TrainingList.vue'
 import AddTrainingButton from '@/components/AddTrainingButton.vue'
-import { getAllTrainings, Training, deleteTraining } from '@/db'
+import { getAllTrainings, type Training, deleteTraining } from '@/db'
 
 const router = useRouter()
 
