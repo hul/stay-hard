@@ -77,6 +77,7 @@ function handleSaveTemplate() {
 
   saveTemplate(template).then(() => {
     alert('Szablon zapisany!')
+    router.push('/')
   })
 }
 
