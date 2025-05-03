@@ -15,7 +15,10 @@
             </div>
         </div>
 
-        <router-link to="/">← Wróć</router-link>
+        <div class="actions">
+            <router-link to="/">← Wróć</router-link>
+            <router-link :to="`/training/${training?.id}/edit`">✏️ Edytuj trening</router-link>
+        </div>
     </main>
 </template>
 
@@ -40,5 +43,11 @@ onMounted(async () => {
 
 .exercise {
     margin: 1rem 0;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
 }
 </style>
