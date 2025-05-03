@@ -2,10 +2,11 @@
     <main class="details">
         <h1>Trening {{ training?.name }}</h1>
         <p><strong>Data:</strong> {{ training?.date }}</p>
+        <p><strong>Punkty:</strong> {{ calculatePoints(training!) }}</p>
 
         <div v-if="training">
             <div v-for="(ex, i) in training.exercises" :key="i" class="exercise">
-                <h3>{{ ex.name }} <small>({{ ex.category }})</small></h3>
+                <h3>{{ ex.name }} <small v-if="ex.category">({{ ex.category }})</small></h3>
                 <p v-if="ex.notes">{{ ex.notes }}</p>
                 <ul>
                     <li v-for="(s, j) in ex.sets" :key="j">
@@ -23,6 +24,8 @@
 </template>
 
 <script setup lang="ts">
+import { calculatePoints } from '@/utils/points'
+
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { type Training, getAllTrainings } from '@/db'

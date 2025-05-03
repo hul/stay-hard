@@ -2,7 +2,7 @@
   <ul class="training-list">
     <li v-for="t in trainings" :key="t.id" class="training-item">
       <router-link :to="`/training/${t.id}`" class="link">
-        <strong>{{ t.date }}</strong> – {{ t.name }}
+        <strong>{{ t.date }}</strong> – {{ t.name }} - ({{ calculatePoints(t) }} pkt)
       </router-link>
       <button class="delete-btn" @click="$emit('delete', t.id)">🗑</button>
     </li>
@@ -10,8 +10,12 @@
 </template>
 
 <script setup lang="ts">
+
+import type { Training } from '@/db';
+import { calculatePoints } from '@/utils/points'
+
 defineProps<{
-  trainings: { id: string; date: string; name: string }[]
+  trainings: Training[]
 }>()
 
 defineEmits<{
@@ -46,5 +50,4 @@ defineEmits<{
   text-decoration: none;
   color: inherit;
 }
-
 </style>
