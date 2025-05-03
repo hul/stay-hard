@@ -13,16 +13,16 @@ export default defineConfig({
         short_name: 'Workout',
         start_url: '/',
         display: 'standalone',
-        background_color: '#ffffff',
+        background_color: '#000000',
         theme_color: '#42b883',
         icons: [
           {
-            src: 'pwa-192x192.png',
+            src: 'stay-hard-192x192.png',
             sizes: '192x192',
             type: 'image/png'
           },
           {
-            src: 'pwa-512x512.png',
+            src: 'stay-hard-512x512.png',
             sizes: '512x512',
             type: 'image/png'
           }
