@@ -1,7 +1,7 @@
 <template>
     <main class="home">
         <h1 class="title">Twoje treningi</h1>
-        <TrainingList :trainings="trainings" />
+        <TrainingList :trainings="trainings" @delete="handleDelete" />
         <AddTrainingButton @create="handleCreate" />
     </main>
 </template>
@@ -11,14 +11,14 @@ import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import TrainingList from '@/components/TrainingList.vue'
 import AddTrainingButton from '@/components/AddTrainingButton.vue'
-import { getAllTrainings, Training } from '@/db'
+import { getAllTrainings, Training, deleteTraining } from '@/db'
 
 const router = useRouter()
 
 const trainings = ref<Training[]>([])
 
 onMounted(async () => {
-  trainings.value = await getAllTrainings()
+    trainings.value = await getAllTrainings()
 })
 
 function handleCreate(type: 'template' | 'blank') {
@@ -29,6 +29,14 @@ function handleCreate(type: 'template' | 'blank') {
         alert('Opcja "Z szablonu" jeszcze nie gotowa')
     }
 }
+
+async function handleDelete(id: string) {
+    if (confirm('Na pewno usunąć ten trening?')) {
+        await deleteTraining(id)
+        trainings.value = await getAllTrainings()
+    }
+}
+
 
 </script>
 
