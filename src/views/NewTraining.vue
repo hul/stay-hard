@@ -14,13 +14,19 @@
             <button @click="addExercise">+ Dodaj ćwiczenie</button>
         </div>
 
-        <button @click="saveTraining">💾 Zapisz trening</button>
+        <button @click="handleSaveTraining">💾 Zapisz trening</button>
     </main>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { v4 as uuidv4 } from 'uuid'
+
+import { saveTraining } from '@/db'
 import ExerciseEditor from '@/components/ExerciseEditor.vue'
+
+const router = useRouter()
 
 const trainingName = ref('')
 const exercises = ref<any[]>([])
@@ -38,12 +44,20 @@ function removeExercise(index: number) {
     exercises.value.splice(index, 1)
 }
 
-function saveTraining() {
-    console.log('Zapisuję trening:', {
+function handleSaveTraining() {
+    const newTraining = {
+        id: uuidv4(),
         name: trainingName.value,
-        exercises: exercises.value
+        date: new Date().toISOString().slice(0, 10),
+        exercises: JSON.parse(JSON.stringify(exercises.value))
+    }
+
+    saveTraining(newTraining).then(() => {
+        alert('Trening zapisany!')
+        router.push('/')
     })
 }
+
 </script>
 
 <style scoped>

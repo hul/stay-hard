@@ -7,17 +7,19 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import TrainingList from '@/components/TrainingList.vue'
 import AddTrainingButton from '@/components/AddTrainingButton.vue'
-
-const trainings = [
-    { id: '1', date: '2025-05-02', name: 'FBW 1' },
-    { id: '2', date: '2025-04-23', name: 'FBW 1' },
-    { id: '3', date: '2025-04-17', name: 'FBW 1' }
-]
+import { getAllTrainings, Training } from '@/db'
 
 const router = useRouter()
+
+const trainings = ref<Training[]>([])
+
+onMounted(async () => {
+  trainings.value = await getAllTrainings()
+})
 
 function handleCreate(type: 'template' | 'blank') {
     if (type === 'blank') {
