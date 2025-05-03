@@ -23,7 +23,7 @@
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { v4 as uuidv4 } from 'uuid'
-import { saveTraining, saveTemplate } from '@/db/trainings'
+import { saveTraining, saveTemplate } from '@/db'
 import ExerciseEditor from '@/components/ExerciseEditor.vue'
 
 const router = useRouter()

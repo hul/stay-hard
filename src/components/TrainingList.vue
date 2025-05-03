@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 
-import type { Training } from '@/db/trainings';
+import type { Training } from '@/db';
 import { calculatePoints } from '@/utils/points'
 
 defineProps<{

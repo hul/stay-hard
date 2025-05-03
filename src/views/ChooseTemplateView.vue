@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { getTemplates } from '@/db/trainings'
+import { getTemplates } from '@/db'
 
 const router = useRouter()
 const templates = ref<any[]>([])

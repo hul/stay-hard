@@ -20,6 +20,12 @@ export interface ExerciseSet {
   reps: number
 }
 
+export interface TrainingTemplate {
+  id: string
+  name: string
+  exercises: Exercise[]
+}
+
 const DB_VERSION = 2
 
 const dbPromise = openDB('stay-hard-db', DB_VERSION, {

@@ -2,6 +2,8 @@
     <main class="home">
         <h1 class="title">Twoje treningi</h1>
         <TrainingList :trainings="trainings" @delete="handleDelete" />
+        <TrainingList :trainings="trainings" @delete="handleDelete" />
+        <TemplatesList :templates="templates" @use="startFromTemplate" />
         <AddTrainingButton @create="handleCreate" />
     </main>
 </template>
@@ -11,14 +13,17 @@ import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import TrainingList from '@/components/TrainingList.vue'
 import AddTrainingButton from '@/components/AddTrainingButton.vue'
-import { getAllTrainings, type Training, deleteTraining } from '@/db/trainings'
+import { getAllTrainings, type Training, deleteTraining, getTemplates, type TrainingTemplate } from '@/db'
+import TemplatesList from '@/components/TemplatesList.vue'
 
 const router = useRouter()
 
 const trainings = ref<Training[]>([])
+const templates = ref<any[]>([])
 
 onMounted(async () => {
     trainings.value = await getAllTrainings()
+    templates.value = await getTemplates()
 })
 
 function handleCreate(type: 'template' | 'blank') {
@@ -36,6 +41,10 @@ async function handleDelete(id: string) {
     }
 }
 
+function startFromTemplate(template: TrainingTemplate) {
+  localStorage.setItem('templateToUse', JSON.stringify(template))
+  router.push('/new-training')
+}
 
 </script>
 
