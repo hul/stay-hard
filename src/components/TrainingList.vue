@@ -4,6 +4,7 @@
       <router-link :to="`/training/${t.id}`" class="link">
         <strong>{{ t.date }}</strong> – {{ t.name }} - ({{ calculatePoints(t) }} pkt)
       </router-link>
+      <button @click="$emit('edit', t.id)">✏️</button>
       <button class="delete-btn" @click="$emit('delete', t.id)">🗑</button>
     </li>
   </ul>
@@ -19,7 +20,8 @@ defineProps<{
 }>()
 
 defineEmits<{
-  (e: 'delete', id: string): void
+  (e: 'delete', id: string): void,
+  (e: 'edit', id: string): void,
 }>()
 </script>
 

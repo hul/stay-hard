@@ -6,6 +6,7 @@
                 📋 {{ template.name }}
                 <div class="buttons">
                     <button @click="$emit('use', template)">Startuj</button>
+                    <button @click="$emit('edit', template.id)">✏️</button>
                     <button @click="$emit('delete', template.id)">🗑</button>
                 </div>
             </li>
@@ -23,6 +24,7 @@ defineProps<{
 defineEmits<{
     (e: 'use', template: TrainingTemplate): void,
     (e: 'delete', id: string): void,
+    (e: 'edit', id: string): void,
 }>()
 </script>
 

@@ -1,8 +1,9 @@
 <template>
     <main class="home">
         <h1 class="title">Twoje treningi</h1>
-        <TrainingList :trainings="trainings" @delete="handleDelete" />
-        <TemplatesList :templates="templates" @use="startFromTemplate" @delete="handleDeleteTemplate" />
+        <TrainingList :trainings="trainings" @delete="handleDelete" @edit="handleEditTraining" />
+        <TemplatesList :templates="templates" @use="startFromTemplate" @delete="handleDeleteTemplate"
+            @edit="handleEditTemplate" />
         <AddTrainingButton @create="handleCreate" />
     </main>
 </template>
@@ -38,6 +39,14 @@ async function handleDelete(id: string) {
         await deleteTraining(id)
         trainings.value = await getAllTrainings()
     }
+}
+
+function handleEditTraining(id: string) {
+    router.push(`/training/${id}/edit`)
+}
+
+function handleEditTemplate(id: string) {
+  router.push(`/template/${id}/edit`)
 }
 
 function startFromTemplate(template: TrainingTemplate) {

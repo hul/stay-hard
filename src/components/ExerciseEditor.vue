@@ -16,7 +16,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue'
 import SetEditor from './SetEditor.vue'
 
 const props = defineProps<{ exercise: any }>()
